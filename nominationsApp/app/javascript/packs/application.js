@@ -17,14 +17,23 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex';
 import App from '../app.vue'
+import searchStore from '../searchStore.js'
 
 Vue.use(TurbolinksAdapter)
+Vue.use(Vuex)
 
 Vue.component('app', App)
+const store = new Vuex.Store({
+  modules: {
+    searchStore
+  }
+})
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el: '[data-behaviour="vue"]',
+    store
   })
 })

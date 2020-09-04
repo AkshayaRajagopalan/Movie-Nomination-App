@@ -1,11 +1,19 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <SearchBar
+      class="searchBar"
+    ></SearchBar>
   </div>
 </template>
 
 <script>
+import SearchBar from '../views/welcome/components/searchBar';
+
 export default {
+  components: {
+    SearchBar
+  },
+
   data() {
     return {
       message: "Hello Vue!"
@@ -15,8 +23,7 @@ export default {
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
+#app {
   text-align: center;
 }
 </style>
