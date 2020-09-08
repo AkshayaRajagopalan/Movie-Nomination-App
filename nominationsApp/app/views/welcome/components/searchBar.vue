@@ -1,10 +1,9 @@
 <template>
-    <input class="search" type="text" v-bind="searchParam" @change="searchMovie" placeholder="Search">
+    <input class="search" type="text" v-bind="searchParam" @input="searchMovie" placeholder="Search">
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import searchStore from '../../../javascript/searchStore';
+import { mapActions, mapState } from 'vuex';
 
 export default {
     data() {
@@ -13,11 +12,15 @@ export default {
         }
     },
 
-    methods: {
-        ...mapActions(['searchOMDB']),
+    computed: {
+        ...mapState('searchStore', ['searchItems']),
+    },
 
-        searchMovie(e) {
-            this.searchOMDB(e.target.value);
+    methods: {
+        ...mapActions('searchStore', ['searchOMDB']),
+
+        async searchMovie(e) {
+            await this.searchOMDB({ search: e.target.value });
         }
     }
 };
